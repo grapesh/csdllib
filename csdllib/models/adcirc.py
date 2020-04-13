@@ -7,7 +7,7 @@ import numpy as np
 from datetime import datetime
 from datetime import timedelta
 import netCDF4
-from csdllib import oper
+from csdllib.oper.sys import msg
 
 #==============================================================================
 def readGrid ( gridFile, verbose=1):
@@ -22,9 +22,9 @@ def readGrid ( gridFile, verbose=1):
     input-file-descriptions/adcirc-grid-and-boundary-information-file-fort-14/
     """
     if verbose:
-        oper.sys.msg( 'info', 'Reading the grid from ' + gridFile)
+        msg( 'info', 'Reading the grid from ' + gridFile)
     if not os.path.exists (gridFile):
-        oper.sys.msg( 'error', 'File ' + gridFile + ' does not exist.')
+        msg( 'error', 'File ' + gridFile + ' does not exist.')
         return
         
     f  = open(gridFile)
@@ -32,14 +32,14 @@ def readGrid ( gridFile, verbose=1):
     myDesc     = f.readline().rstrip()
     myNE, myNP = map(int, f.readline().split())    
     if verbose:
-        oper.sys.msg( 'i','Grid description ' + myDesc + '.')
-        oper.sys.msg( 'i','Grid size: NE= '   + str(myNE) + ', NP=' + str(myNP) + '.')
+        msg( 'i','Grid description ' + myDesc + '.')
+        msg( 'i','Grid size: NE= '   + str(myNE) + ', NP=' + str(myNP) + '.')
 
     myPoints   = np.zeros([myNP,3], dtype=float)
     myElements = np.zeros([myNE,3], dtype=int)
     
     if verbose:
-        oper.sys.msg( 'i','Reading grid points...')
+        msg( 'i','Reading grid points...')
 
     for k in range(myNP):
         line            = f.readline().split()
@@ -48,7 +48,7 @@ def readGrid ( gridFile, verbose=1):
         myPoints[k,2] = float(line[3])
 
     if verbose:
-        oper.sys.msg( 'i','Reading grid elements...')
+        msg( 'i','Reading grid elements...')
 
     for k in range(myNE):
         line              = f.readline().split()
@@ -63,7 +63,7 @@ def readGrid ( gridFile, verbose=1):
     myNBDV   = np.zeros([myNOPE, myNETA], dtype=int)
     
     if verbose:
-        oper.sys.msg('i', 'Reading elevation-specified boundaries...')
+        msg('i', 'Reading elevation-specified boundaries...')
 
     for k in range(myNOPE):
         myNVDLL [k] = int(f.readline().split()[0])
@@ -86,7 +86,7 @@ def readGrid ( gridFile, verbose=1):
     myPIPEDIAM   = np.zeros([myNBOU, myNVEL], dtype=float)
     
     if verbose:
-        oper.sys.msg('i', 'Reading normal flow-specified boundaries...')
+        msg('i', 'Reading normal flow-specified boundaries...')
     for k in range(myNBOU):
         line = f.readline().split()
         myNVELL[k]  = int(line[0])
@@ -147,9 +147,9 @@ def readTimeSeries (ncFile, ncVar = 'zeta', verbose=1):
     Reads fort.61.nc-like file
     """
     if verbose:
-        oper.sys.msg( 'i','Reading [' + ncVar + '] from ' + ncFile)
+        msg( 'i','Reading [' + ncVar + '] from ' + ncFile)
     if not os.path.exists (ncFile):
-        oper.sys.msg( 'e','File ' + ncFile + ' does not exist.')
+        msg( 'e','File ' + ncFile + ' does not exist.')
         return
     
     nc    = netCDF4.Dataset( ncFile )
@@ -195,10 +195,10 @@ def readSurfaceField ( ncFile, ncVar = 'zeta_max', verbose=1 ):
     """
     
     if verbose:
-        oper.sys.msg( 'i','Reading [' + ncVar + '] from ' + ncFile)
+        msg( 'i','Reading [' + ncVar + '] from ' + ncFile)
 
     if not os.path.exists (ncFile):
-        oper.sys.msg( 'e','File ' + ncFile + ' does not exist.')
+        msg( 'e','File ' + ncFile + ' does not exist.')
         return
            
     nc   = netCDF4.Dataset (ncFile)
@@ -239,12 +239,12 @@ def readSurfaceField_ascii ( asciiFile, verbose=1 ):
                                      and NS - number of datasets
     """
     if verbose:
-        oper.sys.msg( 'i','Reading ASCII file ' + asciiFile + '.')
+        msg( 'i','Reading ASCII file ' + asciiFile + '.')
 
     f  = open(asciiFile)
     
     myDesc = f.readline().strip()
-    oper.sys.msg( 'i','Field description [' + myDesc + '].')
+    msg( 'i','Field description [' + myDesc + '].')
     line          = f.readline().split()    
     myNDSETSE     = int(line[0])
     myNP          = int(line[1])
@@ -323,7 +323,7 @@ def readFort15 ( fort15file, verbose=1 ):
     config = dict()
     tides  = dict()
     if verbose:
-        oper.sys.msg( 'i','Reading fort.15 file ' + fort15file)
+        msg( 'i','Reading fort.15 file ' + fort15file)
 
     f = open(fort15file,'r')
     config['mesh']        = f.readline().strip()
@@ -460,7 +460,7 @@ def writeOffset63 ( val, offset63file, note=None):
     Note:
         val should be the same size and order as your grid vectors
     """
-    oper.sys.msg( 'i','Writing Offset63 file...')
+    msg( 'i','Writing Offset63 file...')
     f = open(offset63file,'w')
     if note is None:
         f.write("# ADCIRC Offset file\n")
@@ -475,7 +475,7 @@ def writeOffset63 ( val, offset63file, note=None):
 
 #==============================================================================
 def readOffset63 ( offset63file):
-    oper.sys.msg( 'e','readOffset63() is not yet implemented.')
+    msg( 'e','readOffset63() is not yet implemented.')
     return None
 
 
