@@ -46,7 +46,6 @@ def set (xlim, ylim, datums, floodlevels, zero='MSL',width=14, height=4.5):
         fl_moder_ft   = floodlevels['fl_moder_ft']
         fl_minor_ft   = floodlevels['fl_minor_ft']
 
-
         # Compute and plot minor flood level
         fl_minor_m = ft2meters( datum_mhhw_ft+fl_minor_ft-datum_msl_ft+shift ) 
         if not np.isnan(fl_minor_m) and fl_minor_m < ylim[1]:
