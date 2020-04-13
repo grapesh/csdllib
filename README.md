@@ -1,5 +1,6 @@
 # CSDLLIB
-# Sergey.Vinogradov@noaa.gov
+# 
+@Sergey.Vinogradov@noaa.gov
 
 Python3 framework of libraries required for interfacing with,
 and pre- and post-processing of the NOAA National Ocean Service's
