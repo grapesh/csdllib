@@ -466,8 +466,8 @@ def writeOffset63 ( val, offset63file, note=None):
         f.write("# ADCIRC Offset file\n")
     else:
         f.write("# " + note + "\n")
-    f.write("0.0\n")
-    f.write("0.0\n")    
+    f.write("1.0\n")  # ADCIRC Version 55
+    f.write("1.0\n")    
     for n in range(len(val)):
         f.write(str(n+1) + ' ' + str(val[n]) + '\n')
     f.close()
