@@ -10,6 +10,6 @@ and pre- and post-processing of the NOAA National Ocean Service's
 
 Use 
 
-```import csdllib.oper.sys.msg as print```
+```import csdllib.oper.sys.msg as msg```
 
 to shorten calls.
