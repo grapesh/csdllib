@@ -3,7 +3,6 @@
 """
 
 import datetime
-#import ConfigParser
 from configparser import ConfigParser
 import io
 
@@ -29,13 +28,13 @@ def msg (msgType, msge):
     '''
     #print ('')
     if msgType.lower().startswith('i'):
-        print ('[INFO]: ' + msge)
+        print ('[Info]: ' + msge)
     elif msgType.lower().startswith('w'):
-        print ('[WARN]: ' + msge)
+        print ('[Warn]: ' + msge)
     elif msgType.lower().startswith('e'):
-        print ('[ERROR]: '+ msge)
+        print ('[Error]: '+ msge)
     elif msgType.lower().startswith('t'):
-        print ('[TIME]: ' + msge)
+        print ('[Time]: ' + msge)
     else:
         print ('[    ]: ' + msge)
     
