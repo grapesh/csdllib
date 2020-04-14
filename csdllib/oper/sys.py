@@ -34,9 +34,9 @@ def msg (msgType, msge):
     elif msgType.lower().startswith('e'):
         print ('[Error]: '+ msge)
     elif msgType.lower().startswith('t'):
-        print ('[Time]: ' + msge)
+        print ('[Time]: ' + msge) 
     else:
-        print ('[    ]: ' + msge)
+        print ('[....]: ' + msge)
     
 #==============================================================================
 def removeInlineComments(cfgparser, delimiter):

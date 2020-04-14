@@ -4,4 +4,5 @@ from . import data
 from . import methods
 from . import plot
 
-__all__ = ['data','models','oper','methods','plot']
+__all__ = ['data','models','oper','methods','plot','tests']
+
