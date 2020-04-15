@@ -49,9 +49,9 @@ def removeInlineComments(cfgparser, delimiter):
 
 #==============================================================================
 def config ( iniFile ): 
-    """
+    '''
     Loads configuration file
-    """
+    '''
     with open(iniFile) as f:
         sample_config = f.read()
 
