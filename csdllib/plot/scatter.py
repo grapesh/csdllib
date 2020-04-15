@@ -1,13 +1,13 @@
 """
 @author: Sergey.Vinogradov@noaa.gov
 """
-import csdllib.oper.sys as msg
+from csdllib.oper.sys import msg
 import matplotlib
 matplotlib.use('Agg',warn=False)
 
 #==============================================================================
 def set():
-    """
+    """OD
     Sets up scatter plot axis
     """
     msg('e','function is not yet implemented')
