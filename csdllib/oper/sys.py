@@ -63,6 +63,11 @@ def config ( iniFile ):
     for section in config.sections():
         dictionary[section] = {}
         for option in config.options(section):
-            dictionary[section][option] = config.get(section, option)
+            val = config.get(section, option)
+            try:
+                dictionary[section][option] = float(val)
+            except:
+                dictionary[section][option] = val
+        
 
     return dictionary
