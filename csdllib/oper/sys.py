@@ -69,5 +69,4 @@ def config ( iniFile ):
             except:
                 dictionary[section][option] = val
         
-
     return dictionary
