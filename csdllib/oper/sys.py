@@ -22,20 +22,20 @@ def dateToStamp (date):
     return YYYY+MM+DD
 
 #==============================================================================
-def msg (msgType, msge, file=sys.stdout):
+def msg (msgType, msge, out=sys.stdout):
     '''
     Customize standard I/O here.
     '''
     if msgType.lower().startswith('i'):
-        print ('[Info]: ' + msge,file=file, flush=True)
+        print ('[Info]: ' + msge,file=out, flush=True)
     elif msgType.lower().startswith('w'):
-        print ('[Warn]: ' + msge,file=file, flush=True)
+        print ('[Warn]: ' + msge,file=out, flush=True)
     elif msgType.lower().startswith('e'):
-        print ('[Error]: '+ msge,file=file, flush=True)
+        print ('[Error]: '+ msge,file=out, flush=True)
     elif msgType.lower().startswith('t'):
-        print ('[Time]: ' + msge,file=file, flush=True) 
+        print ('[Time]: ' + msge,file=out, flush=True) 
     else:
-        print ('[....]: ' + msge,file=file, flush=True)
+        print ('[....]: ' + msge,file=out, flush=True)
     
 #==============================================================================
 def removeInlineComments(cfgparser, delimiter):
