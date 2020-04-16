@@ -168,8 +168,13 @@ def readTimeSeries (ncFile, ncVar = 'zeta', verbose=1):
     stations = netCDF4.chartostring(nam)  # Python3 requirement?
 
     ncTitle  = nc.getncattr('title')
-    baseDate = datetime.strptime(nc.variables['time'].base_date[0:19],
+    try:
+        baseDate = datetime.strptime(nc.variables['time'].base_date[0:19], 
                                  '%Y-%m-%d %H:%M:%S')
+    except: # when 00 sec is not written at all
+        baseDate = datetime.strptime(nc.variables['time'].base_date[0:19], 
+                                 '%Y-%m-%d %H:%M  ')
+
     realtime = np.array([baseDate + 
                          timedelta(seconds=int(tim[i])) 
                          for i in range(len(tim))])
