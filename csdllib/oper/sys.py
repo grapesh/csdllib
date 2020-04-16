@@ -22,7 +22,7 @@ def dateToStamp (date):
     return YYYY+MM+DD
 
 #==============================================================================
-def msg (msgType, msge,file = sys.stdout):
+def msg (msgType, msge, file=sys.stdout):
     '''
     Customize standard I/O here.
     '''
