@@ -4,7 +4,7 @@
 
 import datetime
 from configparser import ConfigParser
-import io
+import io, sys
 
 #==============================================================================
 def timeStamp():
@@ -22,21 +22,20 @@ def dateToStamp (date):
     return YYYY+MM+DD
 
 #==============================================================================
-def msg (msgType, msge):
+def msg (msgType, msge,file = sys.stdout):
     '''
     Customize standard I/O here.
     '''
-    #print ('')
     if msgType.lower().startswith('i'):
-        print ('[Info]: ' + msge)
+        print ('[Info]: ' + msge,file=file, flush=True)
     elif msgType.lower().startswith('w'):
-        print ('[Warn]: ' + msge)
+        print ('[Warn]: ' + msge,file=file, flush=True)
     elif msgType.lower().startswith('e'):
-        print ('[Error]: '+ msge)
+        print ('[Error]: '+ msge,file=file, flush=True)
     elif msgType.lower().startswith('t'):
-        print ('[Time]: ' + msge) 
+        print ('[Time]: ' + msge,file=file, flush=True) 
     else:
-        print ('[....]: ' + msge)
+        print ('[....]: ' + msge,file=file, flush=True)
     
 #==============================================================================
 def removeInlineComments(cfgparser, delimiter):
