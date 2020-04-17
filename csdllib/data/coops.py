@@ -147,6 +147,23 @@ def readData (xmlFile):
     return {'dates' : dates, 'values' : values}
 
 #==============================================================================
+def writeData (data, outFile):
+    """
+    Writes data to outFile 
+    Args:
+        data (dict): 'dates' (datetime), 'values' (float)
+        outFile (str): full path to xml data file
+    """
+    dates  = data['dates']
+    values = data['values']
+    with open(outFile) as f:
+        for n in range(len(dates)):
+            line = " "*12 + \
+                datetime.strftime(dates[n], '%Y-%m-%d %H:%M') + ' '+ \
+                str(values[n]) + '\n'
+            f.write (line)
+
+#==============================================================================
 def getStationInfo (stationID):
     
     """
