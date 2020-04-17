@@ -15,6 +15,10 @@ def stampToDate (stamp):
     return datetime.datetime.strptime(stamp, "%Y%m%d")
 
 #==============================================================================
+def stampToTime (stamp):
+    return datetime.datetime.strptime(stamp, "%Y%m%d%H%M%S")
+
+#==============================================================================
 def dateToStamp (date):
     YYYY = str(date.year).zfill(4)
     MM   = str(date.month).zfill(2)
