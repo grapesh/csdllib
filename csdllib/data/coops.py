@@ -156,9 +156,9 @@ def writeData (data, outFile):
     """
     dates  = data['dates']
     values = data['values']
-    with open(outFile) as f:
+    with open(outFile,'w') as f:
         for n in range(len(dates)):
-            line = " "*12 + \
+            line = " "*13 + \
                 datetime.strftime(dates[n], '%Y-%m-%d %H:%M') + ' '+ \
                 str(values[n]) + '\n'
             f.write (line)
