@@ -16,7 +16,7 @@ def stampToDate (stamp):
 
 #==============================================================================
 def stampToTime (stamp):
-    return datetime.datetime.strptime(stamp, "%Y%m%d%H%M%S")
+    return datetime.datetime.strptime(str(int(stamp)), "%Y%m%d%H%M%S")
 
 #==============================================================================
 def dateToStamp (date):
