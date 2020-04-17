@@ -24,7 +24,15 @@ def dateToStamp (date):
     MM   = str(date.month).zfill(2)
     DD   = str(date.day).zfill(2)
     return YYYY+MM+DD
-
+#==============================================================================
+def timeToStamp (date):
+    YYYY = str(date.year).zfill(4)
+    MM   = str(date.month).zfill(2)
+    DD   = str(date.day).zfill(2)
+    HH   = str(date.hour).zfill(2)
+    MI   = str(date.minute).zfill(2)
+    SE   = str(date.second).zfill(2)
+    return YYYY+MM+DD+HH+MI+SE
 #==============================================================================
 def msg (msgType, msge, out=sys.stdout):
     '''
