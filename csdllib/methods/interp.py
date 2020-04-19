@@ -125,6 +125,10 @@ def retime (obsDates, obsVals, modDates, modValsMasked, refStepMinutes=6):
         obsValsProj (np.array)           : projected values of timeseries 1
         modValsProj (np.array)           : projected values of timeseries 2
     """
+    refDates    = []
+    obsValsProj = []
+    modValsProj = []
+
     #Sort by date
     obsDates  = np.array(obsDates)
     obsVals   = np.array(obsVals)
