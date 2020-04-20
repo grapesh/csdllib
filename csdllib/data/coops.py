@@ -138,7 +138,6 @@ def readData (xmlFile):
     values = []
     lines = open(xmlFile).readlines()
     for line in lines:
-        print(line)
         try:
             dates.append  (datetime.strptime(line[13:29],'%Y-%m-%d %H:%M'))
             values.append (float(line[30:38]))
