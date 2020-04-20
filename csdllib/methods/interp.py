@@ -108,7 +108,7 @@ def taperExp (z_full, z_zero, zg, vg):
 
 
 #============================================================================== 
-def retime (obsDates, obsVals, modDates, modValsMasked, refStepMinutes=6):
+def retime (obsDates, obsVals, modDates, modVals, refStepMinutes=6):
     """
     Projects two timeseries (obsDates, obsVals) and (modDates, modVals)
     onto a common reference time scale with a resolution defined by
@@ -141,9 +141,9 @@ def retime (obsDates, obsVals, modDates, modValsMasked, refStepMinutes=6):
     obsVals   = obsVals[ind]
         
     #Sort by date
-    modVals   = np.ma.filled(modValsMasked, np.nan)
-    modDates  =  np.array(modDates)
-    modVals   =  np.array(modVals)
+    #modVals   = np.ma.filled(modValsMasked, np.nan)
+    modDates  = np.array(modDates)
+    modVals   = np.array(modVals)
     ind       = np.argsort(modDates)
     modDates  = modDates[ind]
     modVals   = modVals[ind]
