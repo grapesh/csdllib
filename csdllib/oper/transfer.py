@@ -5,7 +5,7 @@ import os
 from urllib.request import urlopen
 import uuid
 import ssl
-from csdllib import oper
+from csdllib.oper.sys import msg
 
 #==============================================================================
 def download (remote, local):
@@ -13,7 +13,7 @@ def download (remote, local):
     Downloads remote file (using urllib2) if it does not exist locally.
     """
     if not os.path.exists(local):
-        oper.sys.msg ('info','Downloading ' + remote + ' as ' + local)
+        msg ('info','Downloading ' + remote + ' as ' + local)
         try:
             f = urlopen(remote)
             data = f.read()
@@ -21,14 +21,14 @@ def download (remote, local):
                 code.write(data)
             f.close()
         except:
-            oper.sys.msg ('warn', 'file ' + remote + ' was not downloaded. trying to cp...')
+            msg ('warn', 'file ' + remote + ' was not downloaded. trying to cp...')
             try:
                 os.system('cp ' + remote + ' ' + local)
             except:
-                oper.sys.msg ('warn', 'file ' + remote + ' could not be copied')
+                msg ('warn', 'file ' + remote + ' could not be copied')
             
     else:
-        oper.sys.msg('warn','file ' + local + ' exists, skipping.')
+        msg('warn','file ' + local + ' exists, skipping.')
 
 #==============================================================================
 def refresh (remote, local):
@@ -36,20 +36,20 @@ def refresh (remote, local):
     Downloads remote file (using urllib2), overwrites local copy if exists.
     """
     if not os.path.exists(local):
-        oper.sys.msg('info', 'downloading ' + remote + ' as ' + local)
+        msg('info', 'downloading ' + remote + ' as ' + local)
     else:
-        oper.sys.msg ('info', 'overwriting ' + local + ' file with ' + remote)
+        msg ('info', 'overwriting ' + local + ' file with ' + remote)
     try:
         f = urllib2.urlopen(remote)
         data = f.read()
         with open(local, "wb") as code:
             code.write(data)
     except:
-        oper.sys.msg('warn', 'file ' + remote + ' was not downloaded. trying to cp...')
+        msg('warn', 'file ' + remote + ' was not downloaded. trying to cp...')
         try:
             os.system('cp ' + remote + ' ' + local)
         except:
-            oper.sys.msg('warn', 'file ' + remote + ' could not be copied')
+            msg('warn', 'file ' + remote + ' could not be copied')
 
 #==============================================================================
 def readlines (remote, tmpDir=None, tmpFile=None):
@@ -64,7 +64,7 @@ def readlines (remote, tmpDir=None, tmpFile=None):
     if tmpDir is not None:
         tmpFile = os.path.join(tmpDir, tmpFile)
 
-    oper.sys.msg('info','downloading ' + remote + ' as temporary ' + tmpFile)
+    msg('info','downloading ' + remote + ' as temporary ' + tmpFile)
 
     f        = open( tmpFile, 'wb' )
     response = urlopen(remote)
@@ -96,14 +96,14 @@ def readlines_ssl (remote, verbose=False, tmpDir=None, tmpFile=None):
         tmpFile = os.path.join(tmpDir, tmpFile)
 
     if verbose:
-        oper.sys.msg ('info', 'downloading ' + remote + ' as temporary ' + tmpFile)
+        msg ('info', 'downloading ' + remote + ' as temporary ' + tmpFile)
 
     f = open( tmpFile, 'wb' )
     try:
         response = urlopen(remote, context = ctx)
         f.write( response.read() )     
     except:
-        oper.sys.msg ('error', response)       
+        msg ('error', response)       
     f.close ()
 
     lines  = open(tmpFile).readlines()
@@ -115,9 +115,9 @@ def readlines_ssl (remote, verbose=False, tmpDir=None, tmpFile=None):
 def upload(localFile, userHost, remoteFolder):
     cmd = 'scp -q ' + localFile + ' ' + userHost + ':' + remoteFolder
     if os.system(cmd) == 0:
-        oper.sys.msg('info', 'executed ' + cmd)
+        msg('info', 'executed ' + cmd)
     else:
-        oper.sys.msg('error', 'failed to execute ' + cmd)
+        msg('error', 'failed to execute ' + cmd)
         
 #==============================================================================
 def cleanup (tmpDir='.', tmpExt='.tmp'):
