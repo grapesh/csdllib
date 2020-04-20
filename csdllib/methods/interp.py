@@ -176,7 +176,7 @@ def retime (obsDates, obsVals, modDates, modValsMasked, refStepMinutes=6):
             obsValsProj.append (nearestObsVal)
         else:
             obsValsProj.append (np.nan)
-            
+
         nearestModDate, idx = nearest(modDates, t)
         if abs(nearestModDate - t) < prec:
             nearestModVal   = modVals[idx]
