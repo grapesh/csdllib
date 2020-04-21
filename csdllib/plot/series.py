@@ -6,7 +6,6 @@ from csdllib.methods.convert import ft2meters
 import matplotlib
 matplotlib.use('Agg',warn=False)
 import matplotlib.pyplot as plt
-import matplotlib.tri    as tri
 import matplotlib.patches as patches
 import matplotlib.dates as mdates
 
