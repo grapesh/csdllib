@@ -205,6 +205,28 @@ def getStationInfo (stationID):
 
 
 #==============================================================================
+def writeStationInfo (info,  localFile):
+    with open(localFile,'w') as f:
+        f.write (info['name'] + '\n')
+        f.write (info['state'] + '\n')
+        f.write (str(info['lon']) + '\n')
+        f.write (str(info['lat']) + '\n')
+
+#==============================================================================
+def readStationInfo (info,  localFile):
+    ## Parse the file
+    name  = []
+    state = []
+    lon   = []
+    lat   = []
+    lines = open(localFile).readlines()
+    name  = lines[0]
+    state = lines[1]
+    lon   = float(lines[2])
+    lat   = float(lines[3]) 
+    return {'name' : name, 'state' : state, 'lon' : lon, 'lat' : lat}    
+
+#==============================================================================
 def getActiveStations (request = 'https://access.co-ops.nos.noaa.gov/nwsproducts.html?type=current'):
     """
     Downloads and parses the list of CO-OPS active tide gauges.
