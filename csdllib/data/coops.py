@@ -213,7 +213,7 @@ def writeStationInfo (info,  localFile):
         f.write (str(info['lat']) + '\n')
 
 #==============================================================================
-def readStationInfo (info,  localFile):
+def readStationInfo (localFile):
     ## Parse the file
     name  = []
     state = []
