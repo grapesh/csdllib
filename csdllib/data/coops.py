@@ -226,8 +226,6 @@ def getActiveStations (request = 'https://access.co-ops.nos.noaa.gov/nwsproducts
                 active['nws_id'].append(line[13:18])
                 active['lon'].append(float(line[65:76]))
                 active['lat'].append(float(line[38:49]))
-
-
             except:
                 pass
     return active
@@ -263,7 +261,7 @@ def createAnomalyTable (csvFile, dates):
     for count in range(len(active['nos'])):
         
         nos_id = str(active['nos'][count])
-        nws_id   = str(active['nws'][count])        
+        nws_id = str(active['nws'][count])        
         
         try:
             info = getStationInfo (nos_id)
