@@ -52,7 +52,7 @@ def refresh (remote, local):
             msg('warn', 'file ' + remote + ' could not be copied')
 
 #==============================================================================
-def readlines (remote, tmpDir=None, tmpFile=None):
+def readlines (remote, verbose=False, tmpDir=None, tmpFile=None):
     """
     1. Downloads remote into temporary file
     2. Reads line by line
@@ -64,7 +64,8 @@ def readlines (remote, tmpDir=None, tmpFile=None):
     if tmpDir is not None:
         tmpFile = os.path.join(tmpDir, tmpFile)
 
-    msg('info','downloading ' + remote + ' as temporary ' + tmpFile)
+    if verbose:
+        msg('info','downloading ' + remote + ' as temporary ' + tmpFile)
 
     f        = open( tmpFile, 'wb' )
     response = urlopen(remote)
