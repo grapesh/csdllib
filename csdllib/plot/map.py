@@ -16,8 +16,8 @@ def set(lonlim, latlim, fig_w=8.0, coast=None):
     """
     minx, maxx = lonlim
     miny, maxy = latlim
-    dx = maxx - minx
-    dy = maxy - miny
+    dx = float(maxx - minx)
+    dy = float(maxy - miny)
     fig_h = np.round(fig_w*dy/dx, 2)
     cs.oper.sys.msg('i','Creating a figure with sizes :' \
                     + str(fig_w) + 'x' + str(fig_w))
