@@ -136,7 +136,7 @@ def readData (xmlFile):
    ## Parse the file
     dates  = []
     values = []
-    lines = open(xmlFile).readlines()
+    lines = open(xmlFile,errors='replace').readlines()
     for line in lines:
         try:
             dates.append  (datetime.strptime(line[13:29],'%Y-%m-%d %H:%M'))
@@ -218,7 +218,7 @@ def readStationInfo (localFile):
     state = []
     lon   = []
     lat   = []
-    lines = open(localFile).readlines()
+    lines = open(localFile,errors='replace').readlines()
     name  = lines[0].rstrip()
     state = lines[1].rstrip()
     lon   = float(lines[2])
