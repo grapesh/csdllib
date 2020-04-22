@@ -72,7 +72,7 @@ def readlines (remote, verbose=False, tmpDir=None, tmpFile=None):
     f.write ( response.read() )
     f.close ()
  
-    lines  = open(tmpFile).readlines()
+    lines  = open(tmpFile,errors='replace').readlines()
     os.remove( tmpFile )
         
     return lines
@@ -107,7 +107,7 @@ def readlines_ssl (remote, verbose=False, tmpDir=None, tmpFile=None):
         msg ('error', response)       
     f.close ()
 
-    lines  = open(tmpFile).readlines()
+    lines  = open(tmpFile,errors='replace').readlines()
     os.remove( tmpFile )
 
     return lines
