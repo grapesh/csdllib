@@ -17,7 +17,7 @@ def download (remote, local):
         try:
             f = urlopen(remote)
             data = f.read()
-            with open(local, "wb") as code:  #Python3 required b option now!
+            with open(local, "wb", errors="replace") as code:  #Python3 required b option now!
                 code.write(data)
             f.close()
         except:
@@ -42,7 +42,7 @@ def refresh (remote, local):
     try:
         f = urllib2.urlopen(remote)
         data = f.read()
-        with open(local, "wb") as code:
+        with open(local, "wb",errors="replace") as code:
             code.write(data)
     except:
         msg('warn', 'file ' + remote + ' was not downloaded. trying to cp...')
