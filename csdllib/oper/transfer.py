@@ -17,7 +17,7 @@ def download (remote, local):
         try:
             f = urlopen(remote)
             data = f.read()
-            with open(local, "wb", errors="replace") as code:  #Python3 required b option now!
+            with open(local, "wb") as code:  #Python3 required b option now!
                 code.write(data)
             f.close()
         except:
