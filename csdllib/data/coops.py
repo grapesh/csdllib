@@ -6,7 +6,7 @@ import numpy as np
 from csdllib import oper
 
 #==============================================================================
-def getData (stationID,  dateRange, 
+def getData (stationID,  dateRange, tmpDir=None,
              product='waterlevelrawsixmin', datum='MSL', units='meters', verbose=False):
     
     """ 
@@ -85,7 +85,7 @@ def getData (stationID,  dateRange,
                '&Submit=Submit')
     oper.sys.msg( 'i','Downloading ' + request)
            
-    lines = oper.transfer.readlines_ssl (request, verbose)
+    lines = oper.transfer.readlines_ssl (request, verbose, tmpDir)
     
     ## Parse the response
     dates  = []
@@ -164,7 +164,7 @@ def writeData (data, outFile):
             f.write (line)
 
 #==============================================================================
-def getStationInfo (stationID):
+def getStationInfo (stationID, verbose=False, tmpDir=None):
     
     """
     Downloads geographical information for a CO-OPS station
@@ -182,7 +182,7 @@ def getStationInfo (stationID):
     request = ( 'https://tidesandcurrents.noaa.gov/stationhome.html?id=' +
                stationID )
 
-    lines = oper.transfer.readlines (request)    
+    lines = oper.transfer.readlines (request, verbose=verbose, tmpDir=tmpDir)    
     
     try:
         for line in lines:
@@ -214,7 +214,6 @@ def writeStationInfo (info,  localFile):
 
 #==============================================================================
 def readStationInfo (localFile):
-    ## Parse the file
     name  = []
     state = []
     lon   = []
@@ -227,12 +226,13 @@ def readStationInfo (localFile):
     return {'name' : name, 'state' : state, 'lon' : lon, 'lat' : lat}    
 
 #==============================================================================
-def getActiveStations (request = 'https://access.co-ops.nos.noaa.gov/nwsproducts.html?type=current'):
+def getActiveStations (verbose=False, tmpDir=False, 
+    request = 'https://access.co-ops.nos.noaa.gov/nwsproducts.html?type=current'):
     """
     Downloads and parses the list of CO-OPS active tide gauges.
     """
     if 'http' in request:
-        lines = oper.transfer.readlines (request)
+        lines = oper.transfer.readlines (request, verbose, tmpDir)
     else:
         lines = open(request).readlines()
 
