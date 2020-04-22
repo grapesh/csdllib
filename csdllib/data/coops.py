@@ -219,8 +219,8 @@ def readStationInfo (localFile):
     lon   = []
     lat   = []
     lines = open(localFile).readlines()
-    name  = lines[0]
-    state = lines[1]
+    name  = lines[0].rstrip()
+    state = lines[1].rstrip()
     lon   = float(lines[2])
     lat   = float(lines[3]) 
     return {'name' : name, 'state' : state, 'lon' : lon, 'lat' : lat}    
