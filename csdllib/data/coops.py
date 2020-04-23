@@ -2,6 +2,7 @@
 @author: Sergey.Vinogradov@noaa.gov
 """
 import os
+import re
 from datetime import datetime
 import numpy as np
 from csdllib import oper
@@ -261,10 +262,10 @@ def getNOSID (string):
     Parses 7-digit NOS ID from the string (usually, a station description)
     """
     nosid = '0000000'
-    st = string.split()
-    for s in st:
-        if len(s) == 7 and s.isdigit():
-            nosid = s
+    try:
+        nosid = max(re.findall(r'\d+', string), key = len)
+    except:
+        pass
     return nosid
 
 #==============================================================================
