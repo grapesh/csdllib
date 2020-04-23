@@ -1,6 +1,7 @@
 """
 @author: Sergey.Vinogradov@noaa.gov
 """
+import os
 from datetime import datetime
 import numpy as np
 from csdllib import oper
@@ -216,6 +217,7 @@ def writeStationInfo (info,  localFile):
 def readStationInfo (localFile):
     name  = []
     state = []
+    nosid = []
     lon   = []
     lat   = []
     lines = open(localFile,errors='replace').readlines()
@@ -223,7 +225,8 @@ def readStationInfo (localFile):
     state = lines[1].rstrip()
     lon   = float(lines[2])
     lat   = float(lines[3]) 
-    return {'name' : name, 'state' : state, 'lon' : lon, 'lat' : lat}    
+    nosid = getNOSID (os.path.basename(localFile))
+    return {'name' : name, 'state' : state, 'lon' : lon, 'lat' : lat, 'nosid' : nosid}    
 
 #==============================================================================
 def getActiveStations (verbose=False, tmpDir=False, 
