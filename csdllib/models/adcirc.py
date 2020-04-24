@@ -159,7 +159,7 @@ def readTimeSeries (ncFile, ncVar = 'zeta', verbose=1):
         fld.unshare_mask()
     except:
         pass
-    fld [fld == missingVal] = np.nan
+    fld [np.where(fld == missingVal)] = np.nan
                           
     lon  = nc.variables['x'][:]
     lat  = nc.variables['y'][:]    
