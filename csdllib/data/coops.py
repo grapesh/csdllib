@@ -200,7 +200,8 @@ def getStationInfo (stationID, verbose=False, tmpDir=None):
         return {'name'  : stationName, 
                 'state' : stationState,
                 'lon'   : lon, 
-                'lat'   : lat }
+                'lat'   : lat,
+                'nosid' : stationID }
     except:
         oper.sys.msg( 'e','Cannot get info for  ' + stationID)
         return None
