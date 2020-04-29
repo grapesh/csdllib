@@ -8,7 +8,9 @@ import io, sys
 
 #==============================================================================
 def timeStamp():
-    msg('time', str(datetime.datetime.utcnow()) + ' UTC')
+    ts = str(datetime.datetime.utcnow()) + ' UTC'
+    msg('time', ts)
+    return ts
 
 #==============================================================================
 def stampToDate (stamp):
