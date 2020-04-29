@@ -183,9 +183,12 @@ def getStationInfo (stationID, verbose=False, tmpDir=None):
     """
     request = ( 'https://tidesandcurrents.noaa.gov/stationhome.html?id=' +
                stationID )
-
-    lines = oper.transfer.readlines (request, verbose=verbose, tmpDir=tmpDir)    
-    
+    try:
+        lines = oper.transfer.readlines (request, verbose=verbose, tmpDir=tmpDir)    
+    except:
+        oper.sys.msg( 'e','Cannot get info for  ' + stationID)
+        return None
+        
     try:
         for line in lines:
             if 'var station_name'  in line:
