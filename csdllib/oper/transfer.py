@@ -2,7 +2,9 @@
 @author: Sergey.Vinogradov@noaa.gov
 """
 import os
-from urllib.request import urlopen
+#from urllib.request import urlopen
+#import requests
+import urllib.request
 import uuid
 import ssl
 from csdllib.oper.sys import msg
@@ -15,11 +17,15 @@ def download (remote, local):
     if not os.path.exists(local):
         msg ('info','Downloading ' + remote + ' as ' + local)
         try:
-            f = urlopen(remote)
-            data = f.read()
-            with open(local, "wb") as code:  #Python3 required b option now!
-                code.write(data)
-            f.close()
+            urllib.request.urlretrieve(remote, local)
+            #f = urlopen(remote)
+            #data = f.read()
+            #with open(local, "wb") as code:  #Python3 required b option now!
+            #    code.write(data)
+            #f.close()
+            #f = requests.get(remote)
+            #open(local,'wb').write(f)
+
         except:
             msg ('warn', 'file ' + remote + ' was not downloaded. trying to cp...')
             try:
@@ -40,10 +46,16 @@ def refresh (remote, local):
     else:
         msg ('info', 'overwriting ' + local + ' file with ' + remote)
     try:
-        f = urllib2.urlopen(remote)
-        data = f.read()
-        with open(local, "wb",errors="replace") as code:
-            code.write(data)
+        urllib.request.urlretrieve(remote, local)
+
+        ##f = urllib2.urlopen(remote)
+        #f = urlopen(remote)
+        #data = f.read()
+        #with open(local, "w",errors="replace") as code:
+        #    code.write(data)
+        #f = requests.get(remote)
+        #open(local,'wb').write(f)
+
     except:
         msg('warn', 'file ' + remote + ' was not downloaded. trying to cp...')
         try:
@@ -67,11 +79,11 @@ def readlines (remote, verbose=False, tmpDir=None, tmpFile=None):
     if verbose:
         msg('info','downloading ' + remote + ' as temporary ' + tmpFile)
 
-    f        = open( tmpFile, 'wb' )
-    response = urlopen(remote)
-    f.write ( response.read() )
-    f.close ()
- 
+    #f        = open( tmpFile, 'wb' )
+    #response = urlopen(remote)
+    #f.write ( response.read() )
+    #f.close ()
+    urllib.request.urlretrieve(remote, tmpFile)
     lines  = open(tmpFile,errors='replace').readlines()
     os.remove( tmpFile )
         
@@ -99,13 +111,15 @@ def readlines_ssl (remote, verbose=False, tmpDir=None, tmpFile=None):
     if verbose:
         msg ('info', 'downloading ' + remote + ' as temporary ' + tmpFile)
 
-    f = open( tmpFile, 'wb' )
+    #f = open( tmpFile, 'wb' )
     try:
-        response = urlopen(remote, context = ctx)
-        f.write( response.read() )     
+    #    response = urlopen(remote, context = ctx)
+    #    f.write( response.read() )     
+        urllib.request.urlretrieve(remote, tmpFile)
+
     except:
         msg ('error', response)       
-    f.close ()
+    #f.close ()
 
     lines  = open(tmpFile,errors='replace').readlines()
     os.remove( tmpFile )
