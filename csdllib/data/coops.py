@@ -265,9 +265,11 @@ def getNOSID (string):
     """
     Parses 7-digit NOS ID from the string (usually, a station description)
     """
-    nosid = '0000000'
+    nosid = None
     try:
         nosid = max(re.findall(r'\d+', string), key = len)
+        if len(str(nosid)) != 7:
+            nosid = None
     except:
         pass
     return nosid
