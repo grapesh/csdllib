@@ -268,7 +268,7 @@ def getNOSID (string):
     nosid = None
     try:
         nosid = max(re.findall(r'\d+', string), key = len)
-        if len(str(nosid)) != 7:
+        if len(str(nosid)) != 7 or nosid == '0000000':
             nosid = None
     except:
         pass
