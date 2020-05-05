@@ -99,9 +99,11 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False):
                           cmap=myCmap, \
                           vmin=clim[0], \
                           vmax=clim[1], zorder=zorder)
-    
+    #current_cmap = matplotlib.cm.get_cmap()
+    #current_cmap.set_bad(color='gray')
+
     if plotMax:
-        zmax = np.max(z)
+        zmax = np.nanmax(z)
         imax = np.where (z == zmax)[0][0]
         strzmax = str(np.round(zmax,6))
         plt.plot( lon[imax], lat[imax], 'ok', markerfacecolor='r',zorder=zorder+1)
