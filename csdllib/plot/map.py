@@ -166,8 +166,8 @@ def addCoastline (coast, col = 'gray'):
     """
     Adds coastline to the map
     """
-    plt.plot(coast['lon'], coast['lat'],',',color=col,zorder=1)
-    plt.plot( [360.-x for x in coast['lon']], coast['lat'],',',color=col,zorder=1)
+    plt.plot(coast['lon'], coast['lat'],',',color=col,zorder=2)
+    plt.plot( [360.-x for x in coast['lon']], coast['lat'],',',color=col,zorder=2)
 
 #==============================================================================
 def addCities (ax, citiesFile):
@@ -191,15 +191,15 @@ def addGridLines (ax):
     return ax
 
 #==============================================================================
-def ini (iniFile):
+def ini (iniFile, local='tmp.mapfile.ini'):
     """
-    Downloads/reads ini file with domain limits
+    Downloads/reads ini file with domain limits.
+    Also check by autoval.validate.run.setDomainLimits
     """
     cs.oper.sys.msg('i','Using map limits from ' + iniFile)
-    local = 'tmp.mapfile.ini'
 
     if iniFile.startswith('ftp') or iniFile.startswith('http'):
-        cs.oper.transfer.download (iniFile, local)
+        cs.oper.transfer.refresh (iniFile, local)
     else:
         local = iniFile
 
