@@ -219,8 +219,12 @@ def readSurfaceField ( ncFile, ncVar = 'zeta_max', verbose=1 ):
         pass
     fld [fld==missingVal] = np.nan
 
-    baseDate = datetime.strptime(nc.variables['time'].base_date[0:19],
-                                 '%Y-%m-%d %H:%M:%S')
+    d = nc.variables['time'].base_date[0:19].strip()
+    if len(d)==19:
+        baseDate = datetime.strptime(d,'%Y-%m-%d %H:%M:%S')
+    if len(d)==16:
+        baseDate = datetime.strptime(d,'%Y-%m-%d %H:%M')
+
     realtime = np.array([baseDate +
                          timedelta(seconds=int(tim[i]))
                          for i in range(len(tim))])
