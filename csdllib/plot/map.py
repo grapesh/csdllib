@@ -206,5 +206,7 @@ def ini (iniFile, local='tmp.mapfile.ini'):
     cfg = cs.oper.sys.config(local)
     lonlim = [ float(cfg['Limits']['lonmin']), float(cfg['Limits']['lonmax']) ]
     latlim = [ float(cfg['Limits']['latmin']), float(cfg['Limits']['latmax']) ]
+    cs.oper.sys.msg('i','Lonlim: ' + str(lonlim[0]) + ' ' + str(lonlim[1]))
+    cs.oper.sys.msg('i','Latlim: ' + str(latlim[0]) + ' ' + str(latlim[1]))
 
     return lonlim, latlim
