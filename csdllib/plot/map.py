@@ -75,6 +75,12 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False):
     lat       = grid['lat']
     triangles = grid['Elements']
     z         = field
+    if len(z) != len(lon):
+        cs.oper.sys.msg('e','Mesh and field sizes are not the same')
+        cs.oper.sys.msg('e','   Field length is ' + str(len(z)))
+        cs.oper.sys.msg('e','   Mesh  length is ' + str(len(lon)))
+        return
+        
     Tri       = tri.Triangulation(lon, lat, triangles=triangles-1)
 
     if hasattr(z,'mask'): 
@@ -94,6 +100,10 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False):
     Tri.set_mask = mask
 
     myCmap = plt.cm.jet
+    #print ('zmin/max = ' + str(np.nanmin(z)) + ' ' + str(np.nanmax(z)))
+    #print ('clim = ' + str(clim[0]) + ' ' + str(clim[1]))
+    #print('len(z)  =' + str(len(z)))
+
     plt.tripcolor(Tri, z, shading='gouraud',\
                           edgecolors='none', \
                           cmap=myCmap, \
