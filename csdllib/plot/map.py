@@ -123,41 +123,6 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False):
     cbar.ax.tick_params(labelsize=8)     
 
 #==============================================================================
-def addContour (grid, field, clim = [0,3], zorder=0):
-    """
-    Adds (unstructured) gridded field contour to the map
-    """
-    cs.oper.sys.msg('i','Contouring the surface.')
-
-    lon       = grid['lon']
-    lat       = grid['lat']
-    triangles = grid['Elements']
-    z         = field
-    Tri       = tri.Triangulation(lon, lat, triangles=triangles-1)
-
-    if hasattr(z,'mask'): 
-        zmask = z.mask
-    else:
-        zmask = np.ones(len(z), dtype=bool)        
-    # Set mask 
-    # TODO : Optimize this following loop
-    #
-    mask = np.ones(len(Tri.triangles), dtype=bool)
-    count = 0
-    for t in Tri.triangles:
-        count+=1
-        ind = t
-        if np.any(zmask[ind-1]):
-            mask[count-1] = False    
-    Tri.set_mask = mask
-
-    myCmap = plt.cm.jet
-    plt.tricontourf(Tri, z, shading='gouraud',\
-                          cmap=myCmap, \
-                          vmin=clim[0], \
-                          vmax=clim[1], zorder=zorder)
-
-#==============================================================================
 def readCoastline (coastlineFile): 
 
     f = open(coastlineFile,'rb')
