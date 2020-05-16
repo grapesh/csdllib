@@ -90,7 +90,7 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False):
         if np.ptp( np.asarray(lons) ) < 180.0:
             newTriangles.append (t)
             nboundaryTriangles += 1
-    cs.oper.sys.msg('i','Number of found boundary elements: ', 
+    cs.oper.sys.msg('i','Number of found boundary elements: ' + 
         str(len(triangles)-nboundaryTriangles))
 
     #Tri  = tri.Triangulation(lon, lat, triangles=triangles-1)
