@@ -80,8 +80,21 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False):
         cs.oper.sys.msg('e','   Field length is ' + str(len(z)))
         cs.oper.sys.msg('e','   Mesh  length is ' + str(len(lon)))
         return
-        
-    Tri       = tri.Triangulation(lon, lat, triangles=triangles-1)
+    
+    newTriangles = []
+    nboundaryTriangles = 0
+    for t in triangles-1:
+        lons = []
+        for n in range(len(t)):
+            lons.append( lon[t[n]] )
+        if np.ptp( np.asarray(lons) ) < 180.0:
+            newTriangles.append (t)
+            nboundaryTriangles += 1
+    cs.oper.sys.msg('i','Number of found boundary elements: ', 
+        str(len(triangles)-nboundaryTriangles))
+
+    #Tri  = tri.Triangulation(lon, lat, triangles=triangles-1)
+    Tri  = tri.Triangulation(lon, lat, triangles=newTriangles) #-1)
 
     if hasattr(z,'mask'): 
         zmask = z.mask
