@@ -298,7 +298,7 @@ def readFort14 ( fort14file ):
     return readGrid (fort14file)
 
 #==============================================================================
-def readStationsList (f):
+def readStationsList (fileName):
     """
     Reads fort15-like block of fort.61 stations (e.g.)
     4
@@ -307,7 +307,7 @@ def readStationsList (f):
     -91.8 31.12          9999993
     -90.3 32.45          9999994
     """
-    
+    f = open(fileName, 'r')
     nstations  = int(f.readline().split()[0])    
     stations = dict()
     
@@ -319,6 +319,7 @@ def readStationsList (f):
         stations['lon'].append(float(line.split()[0]))
         stations['lat'].append(float(line.split()[1]))
         stations['name'].append(line[20:])
+    f.close()
     return stations
 
 #==============================================================================
