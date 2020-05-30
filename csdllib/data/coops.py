@@ -234,13 +234,12 @@ def readStationInfo (localFile):
     return {'name' : name, 'state' : state, 'lon' : lon, 'lat' : lat, 'nosid' : nosid}    
 
 #==============================================================================
-def getActiveStations (verbose=False, tmpDir=False, 
-    request = 'https://access.co-ops.nos.noaa.gov/nwsproducts.html?type=current'):
+def getActiveStations (request = 'https://access.co-ops.nos.noaa.gov/nwsproducts.html?type=current'):
     """
     Downloads and parses the list of CO-OPS active tide gauges.
     """
     if 'http' in request:
-        lines = oper.transfer.readlines (request, verbose, tmpDir)
+        lines = transfer.readlines (request)
     else:
         lines = open(request).readlines()
 
@@ -249,13 +248,21 @@ def getActiveStations (verbose=False, tmpDir=False,
     active['nws_id'] = []
     active['lon']    = []
     active['lat']    = []
+
+    hist_block = False
     for line in lines:
-        if line[0:4] == '<br>':
+        if 'HistNWSTable' in line:
+            hist_block = True
+        if not hist_block and line[0:14] == '      <tr><td>':
             try:
-                active['nos_id'].append(int(line[5:12]))
-                active['nws_id'].append(line[13:18])
-                active['lon'].append(float(line[65:76]))
-                active['lat'].append(float(line[38:49]))
+                line = line.replace("<tr><td>","")
+                line = line.replace("</td><td>",",")
+                info = line.split(',')
+
+                active['nos_id'].append(int(info[0])) #.append(int(line[14:21]))
+                active['nws_id'].append(info[1])      # (line[30:35])
+                active['lat'].append(float(info[2]))  #line[44:54]))
+                active['lon'].append(float(info[3]))  #line[63:73]))
             except:
                 pass
     return active
