@@ -234,12 +234,13 @@ def readStationInfo (localFile):
     return {'name' : name, 'state' : state, 'lon' : lon, 'lat' : lat, 'nosid' : nosid}    
 
 #==============================================================================
-def getActiveStations (request = 'https://access.co-ops.nos.noaa.gov/nwsproducts.html?type=current'):
+def getActiveStations (verbose=False, tmpDir=False, 
+    request = 'https://access.co-ops.nos.noaa.gov/nwsproducts.html?type=current'):
     """
     Downloads and parses the list of CO-OPS active tide gauges.
     """
     if 'http' in request:
-        lines = transfer.readlines (request)
+        lines = oper.transfer.readlines (request, verbose, tmpDir)
     else:
         lines = open(request).readlines()
 
