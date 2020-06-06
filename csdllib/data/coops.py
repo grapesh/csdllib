@@ -198,7 +198,9 @@ def getStationInfo (stationID, verbose=False, tmpDir=None):
             if 'var lat'           in line:
                 lat          = float(line.split('"')[1])
             if 'var lon'           in line:
-                lon          = float(line.split('"')[1])           
+                lon          = float(line.split('"')[1])   
+                if lon > 0:
+                    lon = lon - 360. # ADCIRC req
         
         return {'name'  : stationName, 
                 'state' : stationState,
