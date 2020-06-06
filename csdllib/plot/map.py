@@ -135,7 +135,7 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False, lonlim=None,
                             (grid['lon']<= lonlim[1])   &
                             (latlim[0]  <= grid['lat']) & 
                             (grid['lat']<= latlim[1] ) ])
-            imax = np.where(z = zmax)[0][0]
+            imax = np.where(z == zmax)[0][0]
 
         strzmax = str(np.round(zmax,1))
         plt.plot( lon[imax], lat[imax], 'ok', markerfacecolor='r',zorder=zorder+1)
