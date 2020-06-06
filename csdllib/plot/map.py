@@ -128,12 +128,18 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False, lonlim=None,
     if plotMax:
         zmax = np.nanmax(z)
         imax = np.where (z == zmax)[0][0]
-        if lonlim is not None and latlim is not None:
+
+        if lonlim and latlim:
             zmax = np.nanmax(z[all (lonlim[0] <= lon, \
                                     lonlim[1] >= lon, \
                                     latlim[0] <= lat, \
                                     latlim[1] >= lat) ])
-            imax = np.where (z == zmax)[0][0]
+            imax = all(             z == zmax, \
+                                    lonlim[0] <= lon, \
+                                    lonlim[1] >= lon, \
+                                    latlim[0] <= lat, \
+                                    latlim[1] >= lat )[0][0]
+
         strzmax = str(np.round(zmax,1))
         plt.plot( lon[imax], lat[imax], 'ok', markerfacecolor='r',zorder=zorder+1)
         plt.text( lon[imax], lat[imax], strzmax,fontsize=6,zorder=zorder+1)  
