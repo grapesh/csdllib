@@ -129,7 +129,7 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False, lonlim=None,
         zmax = np.nanmax(z)
         imax = np.where (z == zmax)[0][0]
 
-        if lonlim and latlim:
+        if lonlim is not None and latlim is not None:
             zmax = np.nanmax(z[all (lonlim[0] <= lon, \
                                     lonlim[1] >= lon, \
                                     latlim[0] <= lat, \
