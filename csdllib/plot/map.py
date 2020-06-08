@@ -139,7 +139,7 @@ def addField (grid, field, clim = [0,3], zorder=0, plotMax = False, lonlim=None,
 
         strzmax = str(np.round(zmax,1))
         plt.plot( lon[imax], lat[imax], 'ok', markerfacecolor='r',zorder=zorder+1)
-        plt.text( lon[imax], lat[imax], strzmax,fontsize=6,zorder=zorder+1)  
+        plt.text( lon[imax], lat[imax], strzmax,fontsize=6,zorder=zorder+2)  
 
     cbar = plt.colorbar()
     cbar.ax.tick_params(labelsize=8)     
