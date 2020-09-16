@@ -1,5 +1,5 @@
 """
-@author: Sergey.Vinogradov@noaa.gov
+@author: grapesh@gmail.com
 """
 from csdllib.oper.sys import msg
 import matplotlib

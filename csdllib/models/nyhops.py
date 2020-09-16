@@ -2,7 +2,7 @@
 """
 Created on Thu Mar 16 10:02:14 2017
 
-@author: Sergey.Vinogradov
+@author: grapesh@gmail.com
 """
 import os
 import numpy as np

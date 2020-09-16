@@ -1,5 +1,5 @@
 """
-@author: Sergey.Vinogradov@noaa.gov
+@author: grapesh@gmail.com
 """
 #============================================================================== 
 def ft2meters(ft):

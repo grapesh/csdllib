@@ -1,5 +1,5 @@
 """
-@author: Sergey.Vinogradov@noaa.gov
+@author: grapesh@gmail.com
 """
 import csdllib as cs
 from csdllib.methods.convert import ft2meters
